@@ -174,3 +174,14 @@ function makeArray(firstArray, secondArray, maxLength) {
 }
 console.log(makeArray(["Mango", "Poly"], ["Ajax", "Chelsea"], 3));
 console.log(makeArray(["Earth", "Jupiter"], ["Neptune", "Uranus"], 4));
+
+function inverted(string) {
+	const inArray = string.split("");
+	let invertedWord = "";
+	for (const index of inArray) {
+		invertedWord +=
+			index === index.toUpperCase() ? index.toLowerCase() : index.toUpperCase();
+	}
+	return invertedWord;
+}
+console.log(inverted("JavaScript")); // jAVAsCRIPT
