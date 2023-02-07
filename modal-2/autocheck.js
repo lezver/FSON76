@@ -155,3 +155,21 @@ const reduceValueArrayOfNumbers = arrayOfNumbers.reduce(
 );
 
 console.log(reduceValueArrayOfNumbers); // 9
+
+// 6
+
+function showMessage() {
+	console.log("Vasya");
+}
+
+setTimeout(showMessage, 0);
+console.log("Colya");
+
+// 7
+
+let showMessageInIf;
+
+if (2 > 1) {
+	showMessageInIf = () => console.log("Message");
+}
+showMessageInIf();

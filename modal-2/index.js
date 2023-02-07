@@ -255,9 +255,7 @@ const resultArray = arr.map(function (item, index, array) {
 
 console.log(resultArray);
 
-arr.forEach((item) => {
-	console.log(item);
-});
+arr.forEach((item) => console.log(item));
 
 const arrOne = [1, 2, 3, 4, 5];
 const reduceValueOne = arrOne.reduce((previousValue, item, index, array) => {
@@ -265,3 +263,25 @@ const reduceValueOne = arrOne.reduce((previousValue, item, index, array) => {
 }, 0);
 
 console.log(reduceValueOne);
+
+const calcSumm = (a, b) => {
+	if (b === 1) {
+		return a;
+	} else {
+		return a * calcSumm(a, b - 1);
+	}
+};
+
+console.log(calcSumm(2, 3));
+
+//
+
+const createMessage = (text, name) => {
+	return `${text}, ${name}`;
+};
+
+const showMessage = (message) => console.log(message);
+
+const initMessage = (text, name) => showMessage(createMessage(text, name));
+
+initMessage("Hello", "Freelancer");
