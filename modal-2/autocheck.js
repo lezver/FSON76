@@ -99,3 +99,59 @@ console.log(
 ); // false
 console.log(includes(["apple", "plum", "pear", "orange"], "plum")); // true
 console.log(includes(["apple", "plum", "pear", "orange"], "kiwi")); // false
+
+//  AUTOCHECK FOR FREELANCER
+const lengthOfArray = (array) => {
+	array.push("Uranus");
+	return `Length of Array is : ${array.length} and Names in Array : ${array}`;
+};
+
+console.log(lengthOfArray(["Earth", "Mars", "Venus", "Jupiter", "Saturn"]));
+
+// 1
+
+const arrayIsPlanets = ["Earth", "Mars", "Venus", "Jupiter", "Saturn"];
+const newArrayisPlanets = arrayIsPlanets;
+newArrayisPlanets.push("Uranus");
+console.log(newArrayisPlanets.length); // 6
+
+// 2
+
+const arrayIsUsers = ["Vanya", "Ishvan"];
+
+arrayIsUsers.push("Olya");
+console.log(arrayIsUsers); // ['Vanya', 'Ishvan', 'Olya']
+
+arrayIsUsers.splice(1, 1, "Petya");
+console.log(arrayIsUsers); // ['Vanya', 'Petya', 'Olya']
+
+arrayIsUsers.splice(1, arrayIsUsers.length);
+console.log(arrayIsUsers); // ['Vanya']
+
+arrayIsUsers.unshift("Masha", "Pasha");
+console.log(arrayIsUsers); // ['Masha', 'Pasha', 'Vanya']
+
+// 3
+
+const arrayIsNames = ["Vanya", "Ishvan", "Olya"];
+
+const deliteSomeName = arrayIsNames.slice(1, 2);
+console.log(deliteSomeName); // ['Ishvan']
+
+//  4
+
+const stringToArray = (string) => {
+	return string.split(",");
+};
+console.log(stringToArray("Vanya,Ishtvan,Olya")); // ['Vanya', 'Ishtvan', 'Olya']
+
+// 5
+
+const arrayOfNumbers = [9, 2, 8];
+const reduceValueArrayOfNumbers = arrayOfNumbers.reduce(
+	(previousValue, item, index, array) => {
+		return previousValue;
+	}
+);
+
+console.log(reduceValueArrayOfNumbers); // 9

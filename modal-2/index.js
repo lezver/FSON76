@@ -109,12 +109,16 @@ console.log(multiply(1, 2, 3));
 console.log(multiply(1, 2, 3, 4));
 console.log(multiply(1, 2, 3, 4, 5));
 
-function testArg() {
+function testArg(ArrayToString) {
 	let stringText = "";
+
 	for (const argument of arguments) {
 		stringText += argument;
 	}
+
 	return stringText.replaceAll(",", " ");
+
+	// return ArrayToString.join(" ");
 }
 console.log(testArg(["Mango", "Ajax", "Poly", "Kiwi"]));
 
@@ -221,3 +225,43 @@ const filterNumber = function (array, ...args) {
 console.log(filterNumber([1, 2, 3, 4, 5], 10, 15, 2, 3, 8)); // [2, 3]
 console.log(filterNumber([10, 15, 25, 30], 23, 30, 18, 15)); // [30, 15]
 console.log(filterNumber([100, 200, 300, 400, 500], 7, 12, 200, 64)); // [200]
+
+const arrTwo = [8, 22, 1, 44, 33];
+
+console.log(arrTwo.sort());
+
+console.log(arrTwo.sort((a, b) => a - b));
+
+console.log(arrTwo.reverse());
+
+const arr = ["Vanya", "Ishtvant", "Olya"];
+
+const resultItem = arr.map(function (item, index, array) {
+	return item[0];
+});
+console.log(arr);
+
+console.log(resultItem);
+
+const resultIndex = arr.map(function (item, index, array) {
+	return index;
+});
+
+console.log(resultIndex);
+
+const resultArray = arr.map(function (item, index, array) {
+	return array[0];
+});
+
+console.log(resultArray);
+
+arr.forEach((item) => {
+	console.log(item);
+});
+
+const arrOne = [1, 2, 3, 4, 5];
+const reduceValueOne = arrOne.reduce((previousValue, item, index, array) => {
+	return item + previousValue;
+}, 0);
+
+console.log(reduceValueOne);
