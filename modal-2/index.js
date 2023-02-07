@@ -185,3 +185,12 @@ function inverted(string) {
 	return invertedWord;
 }
 console.log(inverted("JavaScript")); // jAVAsCRIPT
+const add = function (string) {
+	let inverted = "";
+	for (const index of string) {
+		inverted +=
+			index === index.toUpperCase() ? index.toLowerCase() : index.toUpperCase();
+	}
+	return inverted;
+};
+console.log(add("JavaScript"));
