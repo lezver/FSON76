@@ -194,3 +194,30 @@ const add = function (string) {
 	return inverted;
 };
 console.log(add("JavaScript"));
+
+const fnOfSumNumbers = function (...args) {
+	let sumOfNumbers = 0;
+
+	for (const number of args) {
+		sumOfNumbers += number;
+	}
+	return sumOfNumbers;
+};
+
+console.log(fnOfSumNumbers(1, 2, 3, 4, 5, 6, 7, 8, 9));
+
+const filterNumber = function (array, ...args) {
+	let coincidences = [];
+
+	for (const number of array) {
+		if (args.includes(number)) {
+			coincidences.push(number);
+		}
+	}
+
+	return coincidences;
+};
+
+console.log(filterNumber([1, 2, 3, 4, 5], 10, 15, 2, 3, 8)); // [2, 3]
+console.log(filterNumber([10, 15, 25, 30], 23, 30, 18, 15)); // [30, 15]
+console.log(filterNumber([100, 200, 300, 400, 500], 7, 12, 200, 64)); // [200]
