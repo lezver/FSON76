@@ -283,3 +283,26 @@ shoppingCard.add({ name: "banana", price: 120 });
 console.log(shoppingCard.countTotalPrice());
 
 console.log(shoppingCard.getItems());
+
+const lastWeekTemps = [14, 25, 11];
+const currentWeekTemps = [23, 17, 18];
+
+const allTemps = [...lastWeekTemps, ...currentWeekTemps];
+
+const fnOfTemps = (firstArray, secondArray, ...rest) => {
+	return firstArray + secondArray + rest;
+};
+
+console.log(fnOfTemps(lastWeekTemps, currentWeekTemps, allTemps));
+console.log(Math.min(...allTemps));
+
+const firstObj = { propA: 5, propB: 10 };
+const secondObj = { propC: 15 };
+const thirdObj = { ...firstObj, ...secondObj };
+console.log(thirdObj);
+
+const restObj = (...rest) => {
+	return rest;
+};
+
+console.log(restObj(firstObj, secondObj, thirdObj));
