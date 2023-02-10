@@ -347,3 +347,108 @@ const {
 console.log(firstTitle, firstCoverTitle);
 
 const secondBook = { title: "The First Kingdom" };
+
+const {
+	title: secondTitle,
+	coverImage: secondCoverImage = "https://via.placeholder.com/640/480",
+} = secondBook;
+
+console.log(secondTitle, secondCoverImage);
+
+const firstTypeOfDestructuring = (array) => {
+	for (const { title, author, rating } of array) {
+		console.log(title);
+		console.log(author);
+		console.log(rating);
+	}
+};
+
+firstTypeOfDestructuring(books);
+
+const secondTypeOfDestructuring = (array) => {
+	for (const book of array) {
+		const { title, author, rating } = book;
+		console.log(title);
+		console.log(author);
+		console.log(rating);
+	}
+};
+
+secondTypeOfDestructuring(books);
+
+const user = {
+	name: "Jacques Gluke",
+	tag: "jgluke",
+	stats: {
+		followers: 5603,
+		views: 4827,
+		likes: 1308,
+	},
+};
+const {
+	name: myName,
+	tag: myTag,
+	stats: { followers: allFollowers, views: allViews, likes: allLikes = 0 },
+} = user;
+
+console.log(myName);
+console.log(myTag);
+console.log(allFollowers);
+console.log(allViews);
+console.log(allLikes);
+
+const rgb = [200, 255, 100];
+
+const [red, green, blue, alfa = 0.3] = rgb;
+
+console.log(`R:${red}, G:${green}, B:${blue}, A:${alfa}`);
+
+const rgbL = [200, 255, 100];
+
+let redL, greenL, blueL, alfaL;
+
+[redL, greenL, blueL, alfaL = 0.3] = rgbL;
+
+console.log(`R:${redL}, G:${greenL}, B:${blueL}, A:${alfaL}`);
+
+const [redT, ...restT] = rgb;
+
+console.log(redT);
+console.log(restT);
+
+const [, , blueF] = rgb;
+
+console.log(blueF);
+
+// const doStuffWithBook = (book) => {
+// 	const { title, numberOfPages, downloads, isPublic, rating } = book;
+// 	console.log(title);
+// 	console.log(numberOfPages);
+// 	console.log(downloads);
+// 	console.log(isPublic);
+// 	console.log(rating);
+// };
+
+//  OR
+
+const doStuffWithBook = ({
+	title,
+	numberOfPages,
+	downloads,
+	isPublic,
+	rating,
+}) => {
+	console.log(title);
+	console.log(numberOfPages);
+	console.log(downloads);
+	console.log(isPublic);
+	console.log(rating);
+};
+
+doStuffWithBook({
+	title: "The Last Kingdom",
+	numberOfPages: 736,
+	downloads: 10283,
+	rating: 8.38,
+	isPublic: true,
+});
