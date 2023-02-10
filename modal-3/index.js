@@ -306,3 +306,44 @@ const restObj = (...rest) => {
 };
 
 console.log(restObj(firstObj, secondObj, thirdObj));
+
+const book = {
+	title: "The Last Kingdom",
+	author: "Bernard Cornwell",
+	genres: ["historical prose", "adventure"],
+	isPublic: true,
+	rating: 8.38,
+	isAccessType() {
+		const accessType = this.isPublic ? "public" : "closed";
+		return accessType;
+	},
+};
+
+const {
+	title,
+	author,
+	rating,
+	coverImage = "https://via.placeholder.com/640/480",
+} = book;
+
+console.log(
+	`The book ${title} of author ${author}, is have rating ${rating} in ${book.isAccessType()} access.`
+);
+
+console.log(coverImage);
+console.log(book);
+
+const firstBook = {
+	title: "The Last Kingdom",
+	convetImage:
+		"https://images-na.ssl-images-amazon.com/images/I/51b5YG6Y1rL.jpg",
+};
+
+const {
+	title: firstTitle,
+	coverImage: firstCoverTitle = "https://via.placeholder.com/640/480",
+} = firstBook;
+
+console.log(firstTitle, firstCoverTitle);
+
+const secondBook = { title: "The First Kingdom" };
