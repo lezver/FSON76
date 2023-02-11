@@ -257,171 +257,272 @@ const shoppingCard = {
 		return this.items;
 	},
 	add(product) {
-		this.items.push(product);
+		const { items } = this;
+
+		for (const item of items) {
+			if (item.name === product.name) {
+				item.quantity += 1;
+				return;
+			}
+		}
+
+		const newProduct = {
+			...product,
+			quantity: 1,
+		};
+
+		items.push(newProduct);
 	},
-	remove() {},
+	remove(productName) {
+		const { items } = this;
+
+		for (let i = 0; i < items.length; i += 1) {
+			const { name } = items[i];
+
+			if (name === productName) {
+				items.splice(i, 1);
+			}
+		}
+	},
 	clear() {
-		return (this.items = []);
+		this.items = [];
 	},
 	countTotalPrice() {
+		const { items } = this;
 		let totalPrice = 0;
-		for (const product of this.items) {
-			totalPrice += product.price;
+
+		for (const item of items) {
+			const { price, quantity } = item;
+
+			totalPrice += price * quantity;
 		}
-		return totalPrice;
+
+		return `Total price in the card : ${totalPrice}`;
 	},
-	increaseQuantity() {},
-	decreaseQuatity() {},
+	increaseQuantity(producntName) {
+		const { items } = this;
+		for (const item of items) {
+			if (item.name === producntName) {
+				item.quantity += 1;
+			}
+		}
+	},
+	decreaseQuantity(producntName) {
+		const { items } = this;
+		for (let i = 0; i < items.length; i += 1) {
+			const { name, quantity } = items[i];
+			if (name === producntName) {
+				items[i].quantity -= 1;
+			}
+			if (name === producntName && quantity === 1) {
+				items.splice(i, 1);
+				return;
+			}
+		}
+	},
 };
+
+shoppingCard.add({ name: "apple", price: 50 });
+shoppingCard.add({ name: "apple", price: 50 });
+
+console.table(shoppingCard.getItems());
+console.log(shoppingCard.countTotalPrice());
+
+shoppingCard.clear();
+
+console.table(shoppingCard.getItems());
+console.log(shoppingCard.countTotalPrice());
 
 shoppingCard.add({ name: "apple", price: 50 });
 shoppingCard.add({ name: "lemon", price: 60 });
 shoppingCard.add({ name: "orange", price: 80 });
 shoppingCard.add({ name: "banana", price: 120 });
+shoppingCard.add({ name: "banana", price: 120 });
 
-// shoppingCard.clear();
+console.table(shoppingCard.getItems());
 console.log(shoppingCard.countTotalPrice());
 
-console.log(shoppingCard.getItems());
+shoppingCard.remove("banana");
 
-const lastWeekTemps = [14, 25, 11];
-const currentWeekTemps = [23, 17, 18];
+console.table(shoppingCard.getItems());
+console.log(shoppingCard.countTotalPrice());
 
-const allTemps = [...lastWeekTemps, ...currentWeekTemps];
+shoppingCard.add({ name: "apple", price: 50 });
+shoppingCard.add({ name: "apple", price: 50 });
+shoppingCard.add({ name: "banana", price: 120 });
 
-const fnOfTemps = (firstArray, secondArray, ...rest) => {
-	return firstArray + secondArray + rest;
-};
+console.table(shoppingCard.getItems());
+console.log(shoppingCard.countTotalPrice());
 
-console.log(fnOfTemps(lastWeekTemps, currentWeekTemps, allTemps));
-console.log(Math.min(...allTemps));
+shoppingCard.increaseQuantity("banana");
+shoppingCard.increaseQuantity("banana");
 
-const firstObj = { propA: 5, propB: 10 };
-const secondObj = { propC: 15 };
-const thirdObj = { ...firstObj, ...secondObj };
-console.log(thirdObj);
+console.table(shoppingCard.getItems());
+console.log(shoppingCard.countTotalPrice());
 
-const restObj = (...rest) => {
-	return rest;
-};
+shoppingCard.decreaseQuantity("banana");
+shoppingCard.decreaseQuantity("banana");
+shoppingCard.decreaseQuantity("banana");
+shoppingCard.decreaseQuantity("apple");
+shoppingCard.decreaseQuantity("apple");
 
-console.log(restObj(firstObj, secondObj, thirdObj));
+console.table(shoppingCard.getItems());
+console.log(shoppingCard.countTotalPrice());
 
-const book = {
-	title: "The Last Kingdom",
-	author: "Bernard Cornwell",
-	genres: ["historical prose", "adventure"],
-	isPublic: true,
-	rating: 8.38,
-	isAccessType() {
-		const accessType = this.isPublic ? "public" : "closed";
-		return accessType;
-	},
-};
+// const lastWeekTemps = [14, 25, 11];
+// const currentWeekTemps = [23, 17, 18];
 
-const {
-	title,
-	author,
-	rating,
-	coverImage = "https://via.placeholder.com/640/480",
-} = book;
+// const allTemps = [...lastWeekTemps, ...currentWeekTemps];
 
-console.log(
-	`The book ${title} of author ${author}, is have rating ${rating} in ${book.isAccessType()} access.`
-);
+// const fnOfTemps = (firstArray, secondArray, ...rest) => {
+// 	return firstArray + secondArray + rest;
+// };
 
-console.log(coverImage);
-console.log(book);
+// console.log(fnOfTemps(lastWeekTemps, currentWeekTemps, allTemps));
+// console.log(Math.min(...allTemps));
 
-const firstBook = {
-	title: "The Last Kingdom",
-	convetImage:
-		"https://images-na.ssl-images-amazon.com/images/I/51b5YG6Y1rL.jpg",
-};
+// const firstObj = { propA: 5, propB: 10 };
+// const secondObj = { propC: 15 };
+// const thirdObj = { ...firstObj, ...secondObj };
+// console.log(thirdObj);
 
-const {
-	title: firstTitle,
-	coverImage: firstCoverTitle = "https://via.placeholder.com/640/480",
-} = firstBook;
+// const restObj = (...rest) => {
+// 	return rest;
+// };
 
-console.log(firstTitle, firstCoverTitle);
+// console.log(restObj(firstObj, secondObj, thirdObj));
 
-const secondBook = { title: "The First Kingdom" };
+// const book = {
+// 	title: "The Last Kingdom",
+// 	author: "Bernard Cornwell",
+// 	genres: ["historical prose", "adventure"],
+// 	isPublic: true,
+// 	rating: 8.38,
+// 	isAccessType() {
+// 		const accessType = this.isPublic ? "public" : "closed";
+// 		return accessType;
+// 	},
+// };
 
-const {
-	title: secondTitle,
-	coverImage: secondCoverImage = "https://via.placeholder.com/640/480",
-} = secondBook;
+// const {
+// 	title,
+// 	author,
+// 	rating,
+// 	coverImage = "https://via.placeholder.com/640/480",
+// } = book;
 
-console.log(secondTitle, secondCoverImage);
+// console.log(
+// 	`The book ${title} of author ${author}, is have rating ${rating} in ${book.isAccessType()} access.`
+// );
 
-const firstTypeOfDestructuring = (array) => {
-	for (const { title, author, rating } of array) {
-		console.log(title);
-		console.log(author);
-		console.log(rating);
-	}
-};
+// console.log(coverImage);
+// console.log(book);
 
-firstTypeOfDestructuring(books);
+// const firstBook = {
+// 	title: "The Last Kingdom",
+// 	convetImage:
+// 		"https://images-na.ssl-images-amazon.com/images/I/51b5YG6Y1rL.jpg",
+// };
 
-const secondTypeOfDestructuring = (array) => {
-	for (const book of array) {
-		const { title, author, rating } = book;
-		console.log(title);
-		console.log(author);
-		console.log(rating);
-	}
-};
+// const {
+// 	title: firstTitle,
+// 	coverImage: firstCoverTitle = "https://via.placeholder.com/640/480",
+// } = firstBook;
 
-secondTypeOfDestructuring(books);
+// console.log(firstTitle, firstCoverTitle);
 
-const user = {
-	name: "Jacques Gluke",
-	tag: "jgluke",
-	stats: {
-		followers: 5603,
-		views: 4827,
-		likes: 1308,
-	},
-};
-const {
-	name: myName,
-	tag: myTag,
-	stats: { followers: allFollowers, views: allViews, likes: allLikes = 0 },
-} = user;
+// const secondBook = { title: "The First Kingdom" };
 
-console.log(myName);
-console.log(myTag);
-console.log(allFollowers);
-console.log(allViews);
-console.log(allLikes);
+// const {
+// 	title: secondTitle,
+// 	coverImage: secondCoverImage = "https://via.placeholder.com/640/480",
+// } = secondBook;
 
-const rgb = [200, 255, 100];
+// console.log(secondTitle, secondCoverImage);
 
-const [red, green, blue, alfa = 0.3] = rgb;
+// const firstTypeOfDestructuring = (array) => {
+// 	for (const { title, author, rating } of array) {
+// 		console.log(title);
+// 		console.log(author);
+// 		console.log(rating);
+// 	}
+// };
 
-console.log(`R:${red}, G:${green}, B:${blue}, A:${alfa}`);
+// firstTypeOfDestructuring(books);
 
-const rgbL = [200, 255, 100];
+// const secondTypeOfDestructuring = (array) => {
+// 	for (const book of array) {
+// 		const { title, author, rating } = book;
+// 		console.log(title);
+// 		console.log(author);
+// 		console.log(rating);
+// 	}
+// };
 
-let redL, greenL, blueL, alfaL;
+// secondTypeOfDestructuring(books);
 
-[redL, greenL, blueL, alfaL = 0.3] = rgbL;
+// const user = {
+// 	name: "Jacques Gluke",
+// 	tag: "jgluke",
+// 	stats: {
+// 		followers: 5603,
+// 		views: 4827,
+// 		likes: 1308,
+// 	},
+// };
+// const {
+// 	name: myName,
+// 	tag: myTag,
+// 	stats: { followers: allFollowers, views: allViews, likes: allLikes = 0 },
+// } = user;
 
-console.log(`R:${redL}, G:${greenL}, B:${blueL}, A:${alfaL}`);
+// console.log(myName);
+// console.log(myTag);
+// console.log(allFollowers);
+// console.log(allViews);
+// console.log(allLikes);
 
-const [redT, ...restT] = rgb;
+// const rgb = [200, 255, 100];
 
-console.log(redT);
-console.log(restT);
+// const [red, green, blue, alfa = 0.3] = rgb;
 
-const [, , blueF] = rgb;
+// console.log(`R:${red}, G:${green}, B:${blue}, A:${alfa}`);
 
-console.log(blueF);
+// const rgbL = [200, 255, 100];
 
-// const doStuffWithBook = (book) => {
-// 	const { title, numberOfPages, downloads, isPublic, rating } = book;
+// let redL, greenL, blueL, alfaL;
+
+// [redL, greenL, blueL, alfaL = 0.3] = rgbL;
+
+// console.log(`R:${redL}, G:${greenL}, B:${blueL}, A:${alfaL}`);
+
+// const [redT, ...restT] = rgb;
+
+// console.log(redT);
+// console.log(restT);
+
+// const [, , blueF] = rgb;
+
+// console.log(blueF);
+
+// // const doStuffWithBook = (book) => {
+// // 	const { title, numberOfPages, downloads, isPublic, rating } = book;
+// // 	console.log(title);
+// // 	console.log(numberOfPages);
+// // 	console.log(downloads);
+// // 	console.log(isPublic);
+// // 	console.log(rating);
+// // };
+
+// //  OR
+
+// const doStuffWithBook = ({
+// 	title,
+// 	numberOfPages,
+// 	downloads,
+// 	isPublic,
+// 	rating,
+// }) => {
 // 	console.log(title);
 // 	console.log(numberOfPages);
 // 	console.log(downloads);
@@ -429,26 +530,41 @@ console.log(blueF);
 // 	console.log(rating);
 // };
 
-//  OR
+// doStuffWithBook({
+// 	title: "The Last Kingdom",
+// 	numberOfPages: 736,
+// 	downloads: 10283,
+// 	rating: 8.38,
+// 	isPublic: true,
+// });
 
-const doStuffWithBook = ({
-	title,
-	numberOfPages,
-	downloads,
-	isPublic,
-	rating,
-}) => {
-	console.log(title);
-	console.log(numberOfPages);
-	console.log(downloads);
-	console.log(isPublic);
-	console.log(rating);
-};
+// const authors = { kiwi: 9, poly: 3, ajax: 7, mango: 5 };
 
-doStuffWithBook({
-	title: "The Last Kingdom",
-	numberOfPages: 736,
-	downloads: 10283,
-	rating: 8.38,
-	isPublic: true,
-});
+// const maxOfAuthors = (obj) => {
+// 	// const keys = Object.keys(obj);
+// 	// console.log(keys);
+// 	// let max = 0;
+// 	// for (const key of keys) {
+// 	// 	if (max < obj[key]) {
+// 	// 		max = `${key} ${obj[key]}`;
+// 	// 	}
+// 	// }
+// 	// return max;
+
+// 	// //  if need array
+// 	// return max.split("  ");
+
+// 	const entriesArray = Object.entries(obj);
+// 	let maxRating = 0;
+// 	let total = [];
+// 	for (const entry of entriesArray) {
+// 		const [name, rating] = entry;
+// 		if (maxRating < rating) {
+// 			maxRating = rating;
+// 			total = entry;
+// 		}
+// 	}
+// 	return total;
+// };
+
+// console.log(maxOfAuthors(authors));
