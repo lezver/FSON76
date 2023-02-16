@@ -657,3 +657,200 @@ const formanTime = (numbers) => {
 console.log(formanTime(70));
 console.log(formanTime(450));
 console.log(formanTime(1441));
+
+const stones = [
+	{ name: "emerald", price: 2333, quantity: 3 },
+	{ name: "diamond", price: 3333, quantity: 7 },
+	{ name: "sapphire", price: 2555, quantity: 9 },
+	{ name: "rubble", price: 100, quantity: 57 },
+];
+
+const calcTotalPrice = (stones, stoneName) => {
+	let totalPrice = 0;
+
+	for (const { name, price, quantity } of stones) {
+		if (name === stoneName) {
+			totalPrice = price * quantity;
+		}
+	}
+
+	return totalPrice;
+};
+
+console.log(calcTotalPrice(stones, "emerald"));
+console.log(calcTotalPrice(stones, "diamond"));
+console.log(calcTotalPrice(stones, "sapphire"));
+console.log(calcTotalPrice(stones, "rubble"));
+console.log(calcTotalPrice(stones, "topaz"));
+
+const Transaction = { DEPOSIT: "deposit", WITHDRAW: "withdraw" };
+
+const account = {
+	balance: 0,
+	transactions: [],
+	createTransaction(amount, type) {
+		return {
+			amount,
+			type,
+			id: this.transactions.length + 1,
+		};
+	},
+	deposit(amount) {
+		this.balance += amount;
+		const transaction = this.createTransaction(amount, Transaction.DEPOSIT);
+		console.log(transaction);
+		this.transactions.push(transaction);
+	},
+	withdraw(amount) {
+		if (amount > this.balance) {
+			return console.log("You don't have a cash");
+		}
+		this.balance -= amount;
+		const transaction = this.createTransaction(amount, Transaction.WITHDRAW);
+		console.log(transaction);
+		this.transactions.push(transaction);
+	},
+	getBalance() {
+		return this.balance;
+	},
+	getTransactionDetails(id) {
+		for (const transaction of this.transactions) {
+			if (transaction.id === id) {
+				return console.log(transaction);
+			}
+		}
+		return console.log("Sorry, we can't find this ID :(");
+	},
+	getTransactionTotal(type) {
+		const { transactions } = this;
+		let total = 0;
+
+		for (const transaction of transactions) {
+			if (transaction.type === type) {
+				total += transaction.amount;
+			}
+		}
+		return console.log(total);
+	},
+};
+
+console.log(account.getBalance());
+
+account.deposit(1000);
+account.withdraw(100);
+account.deposit(1000);
+account.withdraw(100);
+account.withdraw(11100);
+account.getTransactionDetails(4);
+account.getTransactionDetails(33);
+account.getTransactionTotal(Transaction.DEPOSIT);
+account.getTransactionTotal(Transaction.WITHDRAW);
+
+console.log(account.balance);
+
+const Likes = { LIKE: "like", DISLIKE: "dislike" };
+
+const accountFacebook = {
+	numberOfLikes: 0,
+	numberOfDisikes: 0,
+	transactionOfLikes: [],
+	createTransactionOfLike(amountOfLikes, typeOfLikes) {
+		return {
+			amountOfLikes,
+			typeOfLikes,
+			idOfTransactionLikes: this.transactionOfLikes.length + 1,
+		};
+	},
+	like(amountOfLikes) {
+		this.numberOfLikes += amountOfLikes;
+
+		const transaction = this.createTransactionOfLike(amountOfLikes, Likes.LIKE);
+
+		this.transactionOfLikes.push(transaction);
+	},
+	dislike(amountOfLikes) {
+		this.numberOfDisikes += amountOfLikes;
+
+		const transaction = this.createTransactionOfLike(
+			amountOfLikes,
+			Likes.DISLIKE
+		);
+
+		this.transactionOfLikes.push(transaction);
+	},
+	getBalanceOfLikes() {
+		const { numberOfLikes, numberOfDisikes } = this;
+		return console.log(
+			`Your likes: ${numberOfLikes} and dislikes: ${numberOfDisikes}`
+		);
+	},
+	getTransactionDetailsOfLikes(idOfTransactionLikes) {
+		for (const transaction of this.transactionOfLikes) {
+			if (transaction.idOfTransactionLikes === idOfTransactionLikes) {
+				return console.log(transaction);
+			}
+		}
+
+		return console.log(`Sorry, we can't find this ${idOfTransactionLikes} ID`);
+	},
+	getTransactionTotalOflikes(typeOfLikes) {
+		let total = 0;
+
+		for (const transaction of this.transactionOfLikes) {
+			if (transaction.typeOfLikes === typeOfLikes) {
+				total += transaction.amountOfLikes;
+			}
+		}
+
+		return console.log(total);
+	},
+};
+
+accountFacebook.like(31);
+accountFacebook.like(1);
+accountFacebook.like(11);
+accountFacebook.dislike(2);
+accountFacebook.dislike(9);
+accountFacebook.dislike(17);
+accountFacebook.getTransactionDetailsOfLikes(33);
+accountFacebook.getTransactionDetailsOfLikes(1);
+accountFacebook.getTransactionTotalOflikes(Likes.DISLIKE);
+accountFacebook.getTransactionTotalOflikes(Likes.LIKE);
+
+console.log(accountFacebook.transactionOfLikes);
+accountFacebook.getBalanceOfLikes();
+
+const userInfo = {
+	name: "Jacques Gluke",
+	tag: "jgluke",
+	age: 30,
+	"likes JS": 1,
+	stats: {
+		followers: 5603,
+		views: 4827,
+		likes: 1308,
+	},
+};
+// 2
+
+console.log(userInfo[58]);
+
+// 3
+
+const user1 = userInfo;
+user1.age = 45;
+
+console.log(userInfo.age);
+
+// 5
+
+for (const key in userInfo) {
+	const valueOfUserInfo = userInfo[key];
+	console.log(valueOfUserInfo);
+}
+
+// 6
+
+for (const key in userInfo.stats) {
+	console.log(userInfo.stats[key]);
+}
