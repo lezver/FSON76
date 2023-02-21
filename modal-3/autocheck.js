@@ -231,10 +231,10 @@ const atTheOldToad = {
 		const { potions } = this;
 
 		for (const potion of potions) {
-			const { name } = potion;
+			let { name } = potion;
 
 			if (name === oldName) {
-				potion.name = newName;
+				name = newName;
 			}
 		}
 

@@ -62,22 +62,288 @@ arrayOfNumbersTest.forEach(testArrowFn);
 
 const planets = ["Земля", "Марс", "Венера", "Юпітер"];
 
-const planetsInUpperCase = planets.map((planet) => planet.toUpperCase());
+console.log(planets.map((planet) => planet.toUpperCase()));
 
-console.log(planetsInUpperCase);
+console.log(planets.map((planet) => planet.toLowerCase()));
 
-const planetsInLowerCase = planets.map((planet) => planet.toLowerCase());
-
-console.log(planetsInLowerCase);
+console.log(planets.map((value) => value.slice(1, -1).toUpperCase()));
 
 console.log(planets);
 
-const changeArrayInPlanets = planets.map((value) => value.slice(1, -1));
+console.log(arrayOfNumbersTest.map((names) => names.name.toUpperCase()));
 
-console.log(changeArrayInPlanets);
+const students = [
+	{ name: "Манго", courses: ["математика", "фізика"] },
+	{ name: "Полі", courses: ["інформатика", "математика"] },
+	{ name: "Ківі", courses: ["фізика", "біологія"] },
+];
 
-const changeArrayOfNumberTest = arrayOfNumbersTest.map((names) =>
-	names.name.toUpperCase()
+const testObj = {
+	name: "fsffsf",
+	age: 32,
+	city: "Kharkiv",
+};
+
+const studentArray = Object.keys(testObj);
+let keys = [];
+let valuest = [];
+keys.push(studentArray);
+valuest.push(testObj[keys]);
+
+console.log(keys, valuest);
+
+console.log(students.map((student) => student.courses));
+
+const allCoursess = students.flatMap((student) => student.courses);
+console.log(allCoursess);
+
+console.log(students.flatMap((value) => value.name));
+
+const values = [51, -3, 27, 21, -68, 42, -37];
+
+console.log(values.filter((value) => value > 0));
+
+console.log(values.filter((value) => value < 0));
+
+console.log(values.filter((value) => (value = 0)));
+
+const uniqueCourses = allCoursess.filter(
+	(value, index, array) => array.indexOf(value) === index
+);
+console.log(uniqueCourses);
+
+const LOW_SCORE = 50;
+const HIGH_SCORE = 80;
+const studentsAll = [
+	{ name: "Манго", score: 83 },
+	{ name: "Полі", score: 59 },
+	{ name: "Аякс", score: 37 },
+	{ name: "Ківі", score: 94 },
+	{ name: "Х'юстон", score: 64 },
+];
+
+console.log(studentsAll.filter(({ score }) => score > HIGH_SCORE));
+console.log(studentsAll.filter(({ score }) => score < LOW_SCORE));
+console.log(
+	studentsAll.filter(({ score }) => score < HIGH_SCORE && score > LOW_SCORE)
+);
+console.log();
+
+const arrayOfNumbersForeFilters = [
+	1.7, 2.3, 3, 4, 5, 6.6, 7, 2.2, 6.2, 1.1, 11, 14,
+];
+
+console.log(
+	arrayOfNumbersForeFilters.filter(
+		(value, index, array) => array.indexOf(value) === index
+	)
 );
 
-console.log(changeArrayOfNumberTest);
+const colorPickerOptions = [
+	{ label: "red", color: "#F44336" },
+	{ label: "green", color: "#4CAF50" },
+	{ label: "blue", color: "#2196F3" },
+	{ label: "pink", color: "#E91E63" },
+	{ label: "indigo", color: "#3F51B5" },
+];
+
+console.log(colorPickerOptions.find((color) => color.label === "green"));
+
+console.log(colorPickerOptions.find((color) => color.label === "red"));
+
+console.log(colorPickerOptions.find((color) => color.label === "black"));
+
+console.log(colorPickerOptions.findIndex((index) => index.label === "green"));
+
+console.log(colorPickerOptions.findIndex((index) => index.label === "pink"));
+
+console.log(colorPickerOptions.findIndex((index) => index.label === "indigo"));
+
+console.log(
+	colorPickerOptions.indexOf((index) => index.label === "indigo") +
+		" : It's not work with object"
+);
+
+console.log(colorPickerOptions.findIndex((index) => index.color === "f23of2"));
+
+console.log(arrayOfNumbersForeFilters.every((value) => value > 0));
+
+console.log(arrayOfNumbersForeFilters.every((value) => value < 0));
+
+console.log([1, 2].some((number) => number >= 0));
+
+console.log([-2, -1].some((number) => number > 0));
+
+console.log(
+	arrayOfNumbersForeFilters.reduce(
+		(previousValue, element, index, array) => previousValue + element + index
+	)
+);
+
+console.log(
+	arrayOfNumbersForeFilters.reduce(
+		(previousValue, value) => previousValue + value
+	)
+);
+
+const totalTestNumbers = arrayOfNumbersForeFilters.reduce(
+	(previousValue, element, index, array) =>
+		previousValue + element / array.length,
+	0
+);
+console.log(totalTestNumbers);
+
+const totalScore = studentsAll.reduce(
+	(previousValue, { score }, index, array) => {
+		return previousValue + score / array.length;
+	},
+	0
+);
+
+console.log(totalScore);
+
+const tweets = [
+	{ id: "000", likes: 5, tags: ["js", "nodejs"] },
+	{ id: "001", likes: 2, tags: ["html", "css"] },
+	{ id: "002", likes: 17, tags: ["html", "js", "nodejs"] },
+	{ id: "003", likes: 8, tags: ["css", "react"] },
+	{ id: "004", likes: 0, tags: ["js", "nodejs", "react"] },
+];
+
+let totalSumOfLikes = 0;
+tweets.forEach(({ likes }) => (totalSumOfLikes += likes));
+
+console.log(totalSumOfLikes / tweets.length);
+
+console.log(
+	tweets.reduce((previousValue, { likes }, index, array) => {
+		return previousValue + likes / array.length;
+	}, 0)
+);
+
+console.log(
+	tweets.reduce((previousValue, { tags }) => {
+		previousValue.push(...tags);
+
+		return previousValue;
+	}, [])
+);
+
+console.log(
+	tweets.reduce((previousValue, { id }) => {
+		previousValue.push(id);
+
+		return previousValue;
+	}, [])
+);
+
+console.log(
+	tweets.reduce((previousValue, { likes }) => {
+		previousValue.push(likes);
+
+		return previousValue;
+	}, [])
+);
+
+const getTags = () =>
+	tweets.reduce((previousValue, { tags }) => {
+		previousValue.push(...tags);
+
+		return previousValue.filter(
+			(value, index, array) => array.indexOf(value) === index
+		);
+	}, []);
+
+console.log(getTags(tweets));
+
+console.log([...arrayOfNumbersForeFilters.sort((a, b) => a - b)]);
+console.log([...arrayOfNumbersForeFilters.sort()]);
+
+const arrayOfNames = [
+	"Vladislav",
+	"Artyom",
+	"Boris",
+	"Alina",
+	"Egor",
+	"Svetlana",
+];
+
+console.log(arrayOfNames.sort((a, b) => a.localeCompare(b)));
+
+console.log(arrayOfNames.sort((a, b) => b.localeCompare(a)));
+
+console.log(
+	studentsAll.sort(
+		(firstStudent, secondStudent) => firstStudent.score - secondStudent.score
+	)
+);
+
+console.log(
+	studentsAll.sort(
+		(firstStudent, secondStudent) => secondStudent.score - firstStudent.score
+	)
+);
+
+console.log(
+	studentsAll.sort((firstStudent, secondStudent) =>
+		firstStudent.name.localeCompare(secondStudent.name)
+	)
+);
+
+console.log(
+	studentsAll.sort((firstStudent, secondStudent) =>
+		secondStudent.name.localeCompare(firstStudent.name)
+	)
+);
+
+const sortedByAscendingScore = [...studentsAll].sort(
+	(firstStudent, secondStudent) => firstStudent.score - secondStudent.score
+);
+
+console.log(sortedByAscendingScore);
+
+const mapByName = sortedByAscendingScore.map((student) => student.name);
+
+console.log(mapByName);
+
+const sortedReversAscendingScore = [...studentsAll].sort(
+	(firstStudent, secondStudent) => secondStudent.score - firstStudent.score
+);
+
+const mapReversByNames = sortedReversAscendingScore.map(
+	(student) => student.name
+);
+
+console.log(mapReversByNames);
+
+const minToMaxNamesOfStudentsScore = [...studentsAll]
+	.sort(
+		(firstStudent, secondStudent) => firstStudent.score - secondStudent.score
+	)
+	.map((student) => student.name);
+
+const maxToMinNamesOfStudendsScore = [...studentsAll]
+	.sort(
+		(firstStudent, secondStudent) => secondStudent.score - firstStudent.score
+	)
+	.map((student) => student.name);
+
+console.log(
+	`This is min to max namex of students ${minToMaxNamesOfStudentsScore}, and this is max to min names of students ${maxToMinNamesOfStudendsScore}`
+);
+
+const sortedByTagsAToZ = tweets
+	.flatMap((tweet) => tweet.tags)
+	.filter((value, index, array) => array.indexOf(value) === index)
+	.sort((a, b) => a.localeCompare(b));
+
+console.log(sortedByTagsAToZ);
+
+const sortedByTagsZToA = tweets
+	.flatMap((tweet) => tweet.tags)
+	.filter((value, index, array) => array.indexOf(value) === index)
+	.sort((a, b) => b.localeCompare(a));
+
+console.log(sortedByTagsZToA);
+
+console.log(arrayOfNumbersForeFilters.find((number) => number === 5));
