@@ -347,3 +347,138 @@ const sortedByTagsZToA = tweets
 console.log(sortedByTagsZToA);
 
 console.log(arrayOfNumbersForeFilters.find((number) => number === 5));
+
+const makeShaff = (shaffName) => {
+	return (dish) => {
+		return `${shaffName} to cook ${dish}`;
+	};
+};
+
+const shaff = makeShaff("Vladislav");
+
+console.log(shaff("soup"));
+
+console.log(shaff("cake"));
+
+console.log(shaff("ice cream"));
+
+const putLikes = (friend) => {
+	return (sumOfLikes) => {
+		return `${friend} put ${sumOfLikes}`;
+	};
+};
+
+const grisha = putLikes("Grisha");
+
+console.log(grisha("1like"));
+
+console.log(grisha("2likes"));
+
+console.log(grisha("3likes"));
+
+console.log(grisha("4likes"));
+
+const eva = putLikes("Eva");
+
+console.log(eva("4likes"));
+
+console.log(eva("41likes"));
+
+console.log(eva("34likes"));
+
+// console.dir(eva);
+
+const rounder = (places) => {
+	return (number) => {
+		return Number.parseFloat(number).toFixed(places);
+	};
+};
+
+const rounderTwo = rounder(2);
+
+const rounderThree = rounder(3);
+
+console.log(rounderTwo("1.432524d2"));
+
+console.log(rounderTwo("32.432524d2"));
+
+console.log(rounderThree("1.432524d2"));
+
+console.log(rounderThree("32.432524d2"));
+
+const myLibFactory = () => {
+	let value = 0;
+
+	const add = (num) => (value += num);
+
+	return {
+		add,
+		getValue() {
+			return value;
+		},
+	};
+};
+
+const myLib = myLibFactory();
+
+console.log(myLib);
+
+console.log(myLib.add(10));
+console.log(myLib.add(101));
+// console.dir(myLib.getValue);
+
+const salary = {
+	mango: 100,
+	poly: 50,
+	ajax: 150,
+};
+
+console.log(Object.keys(salary).reduce((total, key) => total + salary[key], 0));
+
+console.log(Object.values(salary).reduce((total, value) => total + value, 0));
+
+console.log(
+	tweets
+		.reduce((totalTags, { tags }) => [...totalTags, ...tags], [])
+		.reduce((array, tag) => {
+			if (array[tag]) {
+				array[tag] += 1;
+
+				return array;
+			}
+			array[tag] = 1;
+
+			return array;
+		}, {})
+);
+
+console.log(
+	tweets
+		.reduce((totalTags, { tags }) => [...totalTags, ...tags], [])
+		.reduce((acc, tag) => ({ ...acc, [tag]: acc[tag] ? acc[tag] + 1 : 1 }), {})
+);
+
+const each = (array, callback) => {
+	let newArray = [];
+
+	for (const el of array) {
+		newArray.push(callback(el));
+	}
+
+	return newArray;
+};
+console.log(each([64, 49, 36, 25, 16], (value) => value * 2));
+
+console.log(each([64, 49, 36, 25, 16], (value) => value - 10));
+
+console.log(each([64, 49, 36, 25, 16], (value) => Math.sqrt(value)));
+
+console.log(["Mango", "Polly", "Ajax"].forEach((value, index) => value));
+
+function logItems(items) {
+	items.forEach(function (item, index) {
+		console.log(`${index + 1} - ${item}`);
+	});
+}
+
+logItems(["Mango", "Poly", "Ajax"]);
