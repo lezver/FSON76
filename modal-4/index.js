@@ -482,3 +482,145 @@ function logItems(items) {
 }
 
 logItems(["Mango", "Poly", "Ajax"]);
+
+["Mango", "Poly", "Ajax"].forEach((name, index) =>
+	console.log(`${index + 1} - ${name}`)
+);
+
+console.log(tweets.reduce((total, { tags }) => [...total, ...tags], []));
+
+const cars = [
+	{
+		make: "Hondaa",
+		model: "CR-V",
+		type: "suv",
+		amount: 14,
+		price: 24045,
+		onSale: true,
+	},
+	{
+		make: "Honda",
+		model: "Accord",
+		type: "sedan",
+		amount: 2,
+		price: 22455,
+		onSale: true,
+	},
+	{
+		make: "Mazda",
+		model: "Mazda 6",
+		type: "sedan",
+		amount: 8,
+		price: 24195,
+		onSale: false,
+	},
+	{
+		make: "Mazda",
+		model: "CX-9",
+		type: "suv",
+		amount: 7,
+		price: 31520,
+		onSale: true,
+	},
+	{
+		make: "Toyota",
+		model: "4Runner",
+		type: "suv",
+		amount: 19,
+		price: 34210,
+		onSale: false,
+	},
+	{
+		make: "Toyota",
+		model: "Sequoia",
+		type: "suv",
+		amount: 16,
+		price: 45560,
+		onSale: false,
+	},
+	{
+		make: "Toyota",
+		model: "Tacoma",
+		type: "truck",
+		amount: 4,
+		price: 24320,
+		onSale: true,
+	},
+	{
+		make: "Ford",
+		model: "F-150",
+		type: "truck",
+		amount: 11,
+		price: 27110,
+		onSale: true,
+	},
+	{
+		make: "Ford",
+		model: "Fusion",
+		type: "sedan",
+		amount: 13,
+		price: 22120,
+		onSale: true,
+	},
+	{
+		make: "Ford",
+		model: "Explorer",
+		type: "suv",
+		amount: 6,
+		price: 31660,
+		onSale: false,
+	},
+];
+
+console.table(cars.map(({ model }) => model));
+
+const makeCarsWithDiscount = (cars, discond) =>
+	cars.map((car) => ({ ...car, price: car.price * (1 - discond) }));
+
+console.table(makeCarsWithDiscount(cars, 0.2));
+
+console.table(makeCarsWithDiscount(cars, 0.4));
+
+const filterByPrice = (cars, threshold) =>
+	cars.filter(({ price }) => price < threshold);
+
+console.table(filterByPrice(cars, 30000));
+
+console.table(filterByPrice(cars, 25000));
+
+const getCarsWithDiscount = (cars) => cars.filter(({ onSale }) => onSale);
+
+console.table(getCarsWithDiscount(cars));
+
+const getCarsWithType = (cars, type) => cars.filter((car) => car.type === type);
+
+console.table(getCarsWithType(cars, "suv"));
+
+console.table(getCarsWithType(cars, "truck"));
+
+const sortByAscendingAmount = (cars) =>
+	cars.sort((a, b) => a.amount - b.amount);
+
+console.table(sortByAscendingAmount(cars));
+
+const sortedByAscendingModel = (cars) =>
+	cars.sort((a, b) => a.model.localeCompare(b.model));
+
+console.table(sortedByAscendingModel(cars));
+
+const mySet = new Set([1, 2, 1, 4, 3, 2]);
+const result = [...mySet];
+console.log(result);
+
+console.log(new Set([1, 2, 3, 4, 5, 1, 2, 3, 4, 5]));
+
+const deliverPizza = (pizzaName) => `Delivering ${pizzaName} pizza.`;
+
+const makePizza = (pizzaName) =>
+	`Pizza ${pizzaName} is being prepared, please wait...`;
+
+// Chande code below this line
+const makeMessage = (pizzaName, callback) => callback(pizzaName);
+
+console.log(makeMessage("paperoni", makePizza));
+console.log(makeMessage("four cheese", deliverPizza));
