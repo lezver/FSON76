@@ -624,3 +624,74 @@ const makeMessage = (pizzaName, callback) => callback(pizzaName);
 
 console.log(makeMessage("paperoni", makePizza));
 console.log(makeMessage("four cheese", deliverPizza));
+
+const getModels = (cars) => cars.map(({ model }) => model);
+
+console.table(getModels(cars));
+
+const makeCarsWithDiscounts = (cars, discond) =>
+	cars.map((car) => ({ ...car, price: car.price * (1 - discond) }));
+
+console.table(makeCarsWithDiscounts(cars, 0.2));
+console.table(makeCarsWithDiscounts(cars, 0.4));
+
+const filterByPrices = (cars, threshold) =>
+	[...cars].filter(({ price }) => price < threshold);
+
+console.table(filterByPrices(cars, 29999));
+console.table(filterByPrices(cars, 24999));
+
+const getCarsWithDiscounts = (cars) =>
+	[...cars].filter(({ onSale }) => !onSale);
+
+console.table(getCarsWithDiscounts(cars));
+
+const getCarsWithTypes = (cars, type) =>
+	[...cars].filter((car) => car.type === type);
+
+console.table(getCarsWithTypes(cars, "suv"));
+console.table(getCarsWithTypes(cars, "sedan"));
+
+const getCarByModel = (cars, model) =>
+	[...cars].find((car) => car.model === model);
+
+console.table(getCarByModel(cars, "CR-V"));
+console.table(getCarByModel(cars, "Fusion"));
+
+const sortByAscendingAmounts = (cars) =>
+	[...cars].sort((a, b) => a.amount - b.amount);
+
+console.table(sortByAscendingAmounts(cars));
+
+const sortCarsByPrice = (cars) => [...cars].sort((a, b) => b.price - a.price);
+
+console.table(sortCarsByPrice(cars));
+
+const getTotalAmount = (cars) =>
+	[...cars].reduce((total, { amount }) => total + amount, 0);
+
+console.log(getTotalAmount(cars));
+
+const getAvailableCarNames = (cars) =>
+	[...cars]
+		.filter(({ onSale }) => onSale)
+		.map(({ model }) => model)
+		.sort((a, b) => a.localeCompare(b));
+
+console.log(getAvailableCarNames(cars));
+
+const getSortedCarsOnSale = (cars) =>
+	[...cars].filter(({ onSale }) => onSale).sort((a, b) => a.price - b.price);
+
+console.table(getSortedCarsOnSale(cars));
+
+const sortByModel = (cars, order) => {
+	if (order === "asc") {
+		return [...cars].sort((a, b) => a.model.localeCompare(b.model));
+	} else if (order === "desc") {
+		return [...cars].sort((a, b) => b.model.localeCompare(a.model));
+	}
+};
+
+console.table(sortByModel(cars, "asc"));
+console.table(sortByModel(cars, "desc"));
