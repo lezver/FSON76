@@ -1,0 +1,28 @@
+body {
+	background-color: grey;
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+.box {
+	margin: 30px auto 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.js-decrement {
+	font-size: 25px;
+	border-radius: 5px;
+	outline: none;
+	border: none;
+}
+.js-value {
+	font-size: 55px;
+	margin: 0 20px;
+}
+.js-increment {
+	font-size: 25px;
+	border-radius: 5px;
+	outline: none;
+	border: none;
+}

@@ -229,3 +229,111 @@ console.log(mango2.get());
 console.log(mango2.phone); // undefined
 
 // console.log(mango2.#phone); // SyntaxError: Cannot reference undeclared private names: "#phone"
+mango2.email = "fjwlejf;l34f2j;fj2";
+
+console.log(mango2.email);
+
+class User3 {
+	static Roles = {
+		ADMIN: "admin",
+		EDITOR: "editor",
+	};
+	#email;
+	#role;
+
+	constructor({ email, role }) {
+		this.email = email;
+		this.role = role;
+	}
+
+	get role() {
+		return this.#role;
+	}
+	set role(newRole) {
+		this.#role = newRole;
+	}
+}
+
+const mango3 = new User3({
+	email: "mango@email.com",
+	role: User3.Roles.ADMIN,
+});
+
+console.log(mango3.email);
+
+console.log(mango3.Roles);
+
+console.log(User3.Roles);
+
+console.log(mango3.role);
+mango3.role = User3.Roles.EDITOR;
+console.log(mango3.role);
+
+class ContentEditor extends User {}
+
+const editor = new ContentEditor("editor@email.com");
+
+console.log(editor);
+console.log(editor.email);
+
+const counter = {
+	value: 0,
+	increment() {
+		this.value += 1;
+		if (this.value > 10) {
+			this.value = 10;
+		}
+	},
+	decrement() {
+		this.value -= 1;
+		if (this.value === -1) {
+			this.value = 0;
+		}
+	},
+};
+
+const decrementBtn = document.querySelector(".js-decrement");
+const incrementBtn = document.querySelector(".js-increment");
+const valueElement = document.querySelector(".js-value");
+
+decrementBtn.addEventListener("click", () => {
+	counter.decrement();
+	valueElement.textContent = counter.value;
+});
+
+incrementBtn.addEventListener("click", () => {
+	counter.increment();
+	valueElement.textContent = counter.value;
+});
+
+const changeColorForEverythings = function (color) {
+	// console.log(`this :`, this, `this.color : ${color}`);
+	this.color = color;
+};
+
+const hat = {
+	color: "black",
+};
+console.log(hat);
+changeColorForEverythings.call(hat, "orange");
+
+console.log(hat);
+
+const sweater = {
+	color: "green",
+};
+
+console.log(sweater);
+
+changeColorForEverythings.apply(sweater, ["pink"]);
+
+console.log(sweater);
+
+const changeColorForHat = changeColorForEverythings.bind(hat);
+const changeColorForSweater = changeColorForEverythings.bind(sweater);
+
+changeColorForHat("yellow");
+changeColorForSweater("white");
+
+console.log(hat);
+console.log(sweater);
