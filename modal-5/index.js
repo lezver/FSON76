@@ -337,3 +337,88 @@ changeColorForSweater("white");
 
 console.log(hat);
 console.log(sweater);
+
+const objC = {
+	z: 9,
+};
+
+console.log(objC);
+
+const objB = Object.create(objC);
+objB.y = 6;
+
+console.log(objB);
+
+const objA = Object.create(objB);
+objA.x = 3;
+objA.y = 2;
+objA.z = 1;
+
+console.log(objA);
+
+const Car = function ({ brand, model, price } = {}) {
+	// console.log(this);
+	this.brand = brand;
+	this.model = model;
+	this.price = price;
+};
+Car.prototype.changePrice = function (newPrice) {
+	this.price = newPrice;
+};
+const myCar1 = new Car({
+	brand: "volkswagen",
+	model: "tiguan",
+	price: 1700000,
+});
+
+console.log(myCar1);
+
+const myCar2 = new Car({ brand: "volkswagen", model: "golf", price: 1400000 });
+
+console.log(myCar2);
+
+const myCar3 = new Car();
+
+console.log(myCar3);
+
+const myCar4 = new Car({ brand: "audi", model: "Q7", price: 2500000 });
+
+console.log(myCar4);
+
+const myCar5 = new Car({ brand: "honda", model: "CR-V", price: 1950000 });
+
+console.log(myCar5);
+
+myCar5.changePrice(258093);
+
+const UserNew = function ({ email, password } = {}) {
+	this.email = email;
+	this.password = password;
+};
+
+UserNew.prototype.changeEmail = function (newEmail) {
+	this.email = newEmail;
+};
+UserNew.prototype.changePasswortd = function (newPassword) {
+	this.password = newPassword;
+};
+
+const alina = new UserNew({
+	email: "alina@email.com",
+	password: 12041994,
+});
+console.log(alina);
+
+alina.changeEmail("newemail@email.com");
+alina.changePasswortd(19940412);
+
+console.log(alina);
+
+const lezver = new UserNew({ email: "lezver@email.com", password: 12345 });
+
+console.log(lezver);
+
+lezver.changeEmail("newlezver@email.com");
+lezver.changePasswortd(987654321);
+
+console.log(lezver);
