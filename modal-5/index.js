@@ -422,3 +422,162 @@ lezver.changeEmail("newlezver@email.com");
 lezver.changePasswortd(987654321);
 
 console.log(lezver);
+
+const CounterPlugin = function ({
+	rootSelector,
+	initialValue = 0,
+	step = 1,
+} = {}) {
+	this._value = initialValue;
+	this._step = step;
+	this._reference = this._getReference(rootSelector);
+	this._bindEvents();
+	this.updateValueUI();
+};
+CounterPlugin.prototype._getReference = function (rootSelector) {
+	const reference = {};
+	reference.container = document.querySelector(rootSelector);
+
+	reference.incrementBtn =
+		reference.container.querySelector("[data-increment]");
+	reference.decrementBtn =
+		reference.container.querySelector("[data-decrement]");
+	reference.valueEl = reference.container.querySelector("[data-value]");
+
+	return reference;
+};
+CounterPlugin.prototype._bindEvents = function () {
+	this._reference.incrementBtn.addEventListener("click", () => {
+		this.increment();
+		this.updateValueUI();
+	});
+	this._reference.decrementBtn.addEventListener("click", () => {
+		this.decrement();
+		this.updateValueUI();
+	});
+};
+CounterPlugin.prototype.updateValueUI = function () {
+	this._reference.valueEl.textContent = this._value;
+};
+CounterPlugin.prototype.increment = function () {
+	this._value += this._step;
+};
+CounterPlugin.prototype.decrement = function () {
+	this._value -= this._step;
+	if (this._value === -3 || this._value === -10) {
+		this._value = 0;
+	}
+};
+
+new CounterPlugin({ rootSelector: "#counter2", step: 3, initialValue: 12 });
+new CounterPlugin({ rootSelector: "#counter1", step: 10, initialValue: 50 });
+
+class VolksWagenCars {
+	constructor({ model, type, price } = {}) {
+		this._model = model;
+		this._type = type;
+		this._price = price;
+	}
+	get model() {
+		return this._model;
+	}
+	set model(newModel) {
+		this._model = newModel;
+	}
+	get type() {
+		return this._type;
+	}
+	set type(newType) {
+		this._type = newType;
+	}
+	get price() {
+		return this._price;
+	}
+	set price(newPrice) {
+		this._price = newPrice;
+	}
+}
+
+const tiguan = new VolksWagenCars({
+	model: "tiguan",
+	type: "crossower",
+	price: 1680000,
+});
+
+const arteon = new VolksWagenCars({
+	model: "arteon",
+	type: "sedan",
+	price: 1960000,
+});
+
+const golf = new VolksWagenCars({
+	model: "golf",
+	type: "hatchback",
+	price: 1570000,
+});
+
+console.log(tiguan);
+console.log(arteon);
+console.log(golf);
+
+console.log(tiguan.model);
+tiguan.price = 1333111;
+console.log(tiguan.price);
+console.log(tiguan);
+
+class Hero {
+	constructor({ name = "hero", xp = 0 } = {}) {
+		(this._name = name), (this._xp = xp);
+	}
+	get name() {
+		return this._name;
+	}
+	set name(newName) {
+		this._name = newName;
+	}
+	get xp() {
+		return this._xp;
+	}
+	set xp(amount) {
+		this._xp += amount;
+	}
+}
+
+class Necromancer extends Hero {
+	constructor(config) {
+		super(config);
+		this._mana = config.mana;
+	}
+	get mana() {
+		return this._mana;
+	}
+	set mana(amount) {
+		this._mana += amount;
+	}
+}
+
+class Warrior extends Hero {
+	constructor(config) {
+		super(config);
+		this._energy = config.energy;
+	}
+	get energy() {
+		return this._energy;
+	}
+	set energy(amount) {
+		this._energy += amount;
+	}
+}
+
+const lezz = new Necromancer({ name: "lezz", xp: 1000, mana: 500 });
+
+lezz.name = "lezver";
+lezz.xp = 50;
+lezz.mana = 25;
+console.log(lezz);
+
+const rascul = new Warrior({ name: "rascul", xp: 1100, energy: 90 });
+
+rascul.xp = 100;
+rascul.energy = 10;
+console.log(rascul);
