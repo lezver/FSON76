@@ -473,6 +473,13 @@ new CounterPlugin({ rootSelector: "#counter2", step: 3, initialValue: 12 });
 new CounterPlugin({ rootSelector: "#counter1", step: 10, initialValue: 50 });
 
 class VolksWagenCars {
+	static Color = {
+		WHITE: "white",
+		BLACK: "black",
+	};
+	static getColor(car) {
+		return car.Color;
+	}
 	constructor({ model, type, price } = {}) {
 		this._model = model;
 		this._type = type;
@@ -581,3 +588,172 @@ const rascul = new Warrior({ name: "rascul", xp: 1100, energy: 90 });
 rascul.xp = 100;
 rascul.energy = 10;
 console.log(rascul);
+
+const somePeople = {
+	name: "Serhii",
+	prof: "hronometr",
+};
+
+function helloMyFriend(args) {
+	console.log(`hello, ${this.name}` + args);
+}
+
+const myBind = function (fn) {
+	const context = this;
+	return function (...args) {
+		return fn.apply(context, args);
+	};
+};
+Object.prototype.myBindProto = myBind;
+
+const tesMySelfBind = somePeople.myBindProto(helloMyFriend);
+tesMySelfBind(",my dear friend");
+
+class Test1 {
+	static Roles = {
+		ADMIN: "admin",
+		EDITOR: "editor",
+		MENTOR: "mentor",
+		STUDENT: "student",
+	};
+	#role;
+	constructor({ role } = {}) {
+		this.#role = role;
+	}
+	get role() {
+		return this.#role;
+	}
+	set role(newRole) {
+		this.#role = newRole;
+	}
+}
+
+const test = new Test1({ role: Test1.Roles.STUDENT });
+test.role = Test1.Roles.ADMIN;
+console.log(test.role);
+
+const chopShop = {
+	stones: [
+		{ name: "Emerald", price: 1300, quantity: 4 },
+		{ name: "Diamond", price: 2700, quantity: 3 },
+		{ name: "Diamond", price: 2700, quantity: 1 },
+		{ name: "Sapphire", price: 1400, quantity: 7 },
+		{ name: "Ruby", price: 800, quantity: 2 },
+	],
+	calcTotalPrice(stoneName) {
+		return this.stones.reduce((acc, { name, price, quantity }) => {
+			if (name === stoneName) {
+				acc += price * quantity;
+			}
+			return acc;
+		}, 0);
+	},
+};
+
+console.log(chopShop.calcTotalPrice("Emerald")); // 5200
+
+console.log(chopShop.calcTotalPrice("Diamond")); // 10800
+
+console.log(chopShop.calcTotalPrice("Sapphire")); // 9800
+
+console.log(chopShop.calcTotalPrice("Ruby")); // 1600
+
+const calculator = {
+	array: [],
+	read(a, b) {
+		this.array.push(a, b);
+	},
+	add() {
+		return this.array[0] + this.array[1];
+	},
+	mult() {
+		return this.array[0] * this.array[1];
+	},
+	read(a, b) {
+		this.a = a;
+		this.b = b;
+	},
+	add() {
+		return this.a + this.b;
+	},
+	mult() {
+		return this.a * this.b;
+	},
+	divide(numberName) {
+		const total = this[numberName] / this[numberName === "a" ? "b" : "a"];
+		if (total < 0) return 0;
+		return total;
+	},
+	subtract(numberName) {
+		const total = this[numberName] - this[numberName === "a" ? "b" : "a"];
+		if (total < 0) return 0;
+		return total;
+	},
+};
+
+calculator.read(11, 33);
+
+console.log(calculator.add());
+console.log(calculator.mult());
+console.log(calculator.divide("a"));
+console.log(calculator.subtract("a"));
+
+class Blooger {
+	constructor({ email, age, numbersOfPosts = 0, topic = [] } = {}) {
+		this.email = email;
+		this.age = age;
+		this.numbersOfPosts = numbersOfPosts;
+		this.topic = topic;
+	}
+
+	getInfo() {
+		const { email, age, numbersOfPosts } = this;
+		return `User ${email} is ${age} users old and has ${numbersOfPosts} posts`;
+	}
+	updatePostsCount(value) {
+		this.numbersOfPosts += value;
+	}
+}
+
+const john = new Blooger({
+	email: "john@email.com",
+	age: 24,
+	numbersOfPosts: 20,
+	topics: ["tech", "cooking"],
+});
+
+console.log(john.getInfo());
+
+john.updatePostsCount(5);
+
+class Storage {
+	constructor(items = []) {
+		this.items = items;
+	}
+	getItems() {
+		return this.items;
+	}
+	addItem(item) {
+		if (this.items.includes(item)) {
+			return console.log(`This ${item} is has in here!`);
+		}
+		this.items.push(item);
+	}
+}
+
+const storage = new Storage([
+	"apple",
+	"lemon",
+	"cherry",
+	"watermelon",
+	"banana",
+]);
+console.log(storage.getItems());
+
+storage.addItem("strawberry");
+storage.addItem("apple");
+storage.addItem("carrot");
+storage.addItem("lemon");
+storage.addItem("watermelon");
+
+console.log(storage.getItems());
